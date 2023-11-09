@@ -6,7 +6,7 @@ import { InsurancePolicy, PolicyTypes } from "@typedefs/policy";
 import { AddPolicy, UpdatePolicy } from "@helper/client/policy";
 import { useSession } from "next-auth/react";
 import SnackBarComponent from "@components/Snackbar";
-import EdiaForm from "./EdiaForm";
+import EdiaForm from "./GiaForm";
 import FormRenderer from "./FormRenderer";
 import Remarks from "./Remarks";
 import { useRouter } from "next/router";
