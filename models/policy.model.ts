@@ -149,7 +149,7 @@ const PolicySchema = new Schema(
     },
     insurer: String,
     line: String,
-    giaIssuedDate: {
+    ediaIssuedDate: {
       type: Date,
     },
     policyNo: {
@@ -163,12 +163,12 @@ const PolicySchema = new Schema(
       type: Date,
     },
     mailingAddress: String,
-    giaAr: String,
-    giaDate: {
+    ediaAr: String,
+    ediaDate: {
       type: Date,
     },
-    giaOr: String,
-    giaARDate: Date,
+    ediaOr: String,
+    ediaARDate: Date,
     insuranceOrNo: String,
     insuranceOrNoDate: {
       type: Date,

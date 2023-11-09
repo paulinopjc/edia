@@ -11,21 +11,21 @@ import { InsurancePolicy } from "@typedefs/policy";
 export const savePolicy = async (insurancePolicy: InsurancePolicy | InsurancePolicy[], agentDetails: Partial<User>) => {
   //const mongoSession = await session();
   const { username, _id } = agentDetails;
-  
+
   try {
     console.log("POLICY SENT: ", insurancePolicy);
     const policy = (Array.isArray(insurancePolicy) ? insurancePolicy : [insurancePolicy]).map((e: InsurancePolicy) => ({
       updateOne: {
-        filter: { giaOr: e.giaOr, giaIssuedDate: convertDateToIso(String(e.giaIssuedDate)) },
+        filter: { ediaOr: e.ediaOr, ediaIssuedDate: convertDateToIso(String(e.ediaIssuedDate)) },
         update: {
           ...e,
           creator: _id,
           updatedByAgent: _id,
           updatedByAgentName: username,
-          giaIssuedDate: convertDateToIso(String(e.giaIssuedDate)),
+          ediaIssuedDate: convertDateToIso(String(e.ediaIssuedDate)),
           inception: convertDateToIso(String(e.inception)),
           expiry: convertDateToIso(String(e.expiry)),
-          giaDate: convertDateToIso(String(e.giaDate)),
+          ediaDate: convertDateToIso(String(e.ediaDate)),
           insuranceOrNoDate: convertDateToIso(String(e.insuranceOrNoDate)),
         },
         upsert: true,
@@ -47,7 +47,7 @@ export const getPolicies = async (query: Query) => {
     return await Policy.aggregate([
       {
         $match: {
-          $or: [{ soaNo: { $regex: search ?? "", $options: "i" } }, { insurer: { $regex: search ?? "", $options: "i" } }, { policyNo: { $regex: search ?? "", $options: "i" } }, { giaOr: { $regex: search ?? "", $options: "i" } }, { insuranceOrNo: { $regex: search ?? "", $options: "i" } }],
+          $or: [{ soaNo: { $regex: search ?? "", $options: "i" } }, { insurer: { $regex: search ?? "", $options: "i" } }, { policyNo: { $regex: search ?? "", $options: "i" } }, { ediaOr: { $regex: search ?? "", $options: "i" } }, { insuranceOrNo: { $regex: search ?? "", $options: "i" } }],
         },
       },
     ])

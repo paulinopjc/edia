@@ -110,7 +110,7 @@ var PolicySchema = new mongoose_1.Schema(
     },
     insurer: String,
     line: String,
-    giaIssuedDate: {
+    ediaIssuedDate: {
       type: Date,
     },
     policyNo: String,
@@ -122,11 +122,11 @@ var PolicySchema = new mongoose_1.Schema(
       type: Date,
     },
     mailingAddress: String,
-    giaAr: String,
-    giaDate: {
+    ediaAr: String,
+    ediaDate: {
       type: Date,
     },
-    giaOr: String,
+    ediaOr: String,
     insuranceOrNo: String,
     insuranceOrNoDate: {
       type: Date,

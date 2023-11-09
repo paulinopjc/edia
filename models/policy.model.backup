@@ -157,11 +157,11 @@
 //       type: String,
 //
 //     },
-//     giaArNo: {
+//     ediaArNo: {
 //       type: String,
 //
 //     },
-//     giaArDate: {
+//     ediaArDate: {
 //       type: Date,
 //
 //     },
@@ -173,11 +173,11 @@
 //       type: Date,
 //
 //     },
-//     giaOrNo: {
+//     ediaOrNo: {
 //       type: String,
 //
 //     },
-//     giaOrDate: {
+//     ediaOrDate: {
 //       type: Date,
 //
 //     },

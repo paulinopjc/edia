@@ -1,4 +1,4 @@
-cd C:\Users\cyrus\OneDrive\Documents\giavault
+cd C:\Users\cyrus\OneDrive\Documents\ediavault
 git pull
 rmdir /s /q .next
 rmdir /s /q node_modules

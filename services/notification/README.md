@@ -12,10 +12,7 @@
      - `index.js`
    - Customization
 
-
-
 ---
-
 
 ## Generating a Model File with TypeScript Compiler (tsc)
 
@@ -24,18 +21,20 @@
 The `model.js` file is generated using the TypeScript Compiler (`tsc`) command. It involves specifying the input TypeScript file and the output directory where the generated JavaScript file should be placed.
 
 ### Steps to Generate a Model File
+
 If you have a `model.ts` file and want to generate the corresponding JavaScript model file using the TypeScript compiler (`tsc`), follow these steps:
 
 1. Open your terminal or command prompt.
 2. Navigate to the root directory of your project.
-3. Run the `tsc` command followed by the path to your `model.ts` file and the `--outDir` option with the desired output directory. 
+3. Run the `tsc` command followed by the path to your `model.ts` file and the `--outDir` option with the desired output directory.
 
    Example:
+
    ```shell
-   tsc /Users/xsephtion/RTSP/giavault/models/policy.model.ts --outDir /Users/xsephtion/RTSP/giavault/services/notification
+   tsc /Users/xsephtion/RTSP/ediavault/models/policy.model.ts --outDir /Users/xsephtion/RTSP/ediavault/services/notification
    ```
 
-   Replace `/Users/xsephtion/RTSP/giavault/models/policy.model.ts` with the actual path to your `model.ts` file, and `/Users/xsephtion/RTSP/giavault/services/notification` with the desired output directory path.
+   Replace `/Users/xsephtion/RTSP/ediavault/models/policy.model.ts` with the actual path to your `model.ts` file, and `/Users/xsephtion/RTSP/ediavault/services/notification` with the desired output directory path.
 
 4. The TypeScript compiler will transpile the `model.ts` file and generate the corresponding JavaScript file in the specified output directory.
 
@@ -47,6 +46,7 @@ After generating the JavaScript model file, you need to update the default expor
 2. Locate the line that contains the default export statement, which may look similar to this:
 
    From:
+
    ```javascript
    var Policy = mongoose_1.models.Policy || (0, mongoose_1.model)("Policy", PolicySchema);
    exports.default = Policy;
@@ -55,6 +55,7 @@ After generating the JavaScript model file, you need to update the default expor
 3. Update the export statement to use a named export instead of the default export. Modify the line as follows:
 
    From:
+
    ```javascript
    exports.Policy = mongoose_1.models.Policy || (0, mongoose_1.model)("Policy", PolicySchema);
    ```
@@ -66,8 +67,6 @@ By updating the export statement, you are now exporting the `Policy` model as a 
 Remember to update your imports in other files accordingly to use the named import syntax when referencing the `Policy` model.
 
 That's it! You have now generated the model file using the TypeScript compiler and updated the export statement to use a named export.
-
-
 
 # Notification System Documentation
 
@@ -121,7 +120,7 @@ This file exports the `createNotifs` function, which is responsible for scheduli
 This function sets up a cron job using the `CronJob` library. It schedules the `createExpiringPoliciesNotification` function to run every 24 hours, triggering the generation of expiring policies notifications.
 
 - Usage:
-  
+
   ```javascript
   const createNotifs = require("./index").createNotifs;
 

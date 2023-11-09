@@ -6,12 +6,12 @@ import { InsurancePolicy } from "@typedefs/policy";
 import moment from "moment";
 import { FC } from "react";
 
-interface IGiaForm {
+interface IEdiaForm {
   data?: Partial<InsurancePolicy>;
   setData: React.Dispatch<React.SetStateAction<Partial<InsurancePolicy>>>;
 }
 
-const GiaForm: FC<IGiaForm> = ({ data, setData }) => {
+const EdiaForm: FC<IEdiaForm> = ({ data, setData }) => {
   const insurer = ["COCOGEN INSURANCE INC.", "ETIQA LIFE & GENERAL ASSURANCE PHILIPPINES, INC.", "INSULAR HEALTH CARE", "MALAYAN INSURANCE COMPANY, INC.", "MAXICARE HEALTHCARE CORPORATION", "PACIFIC CROSS INSURANCE, INC.", "PARAMOUNT LIFE AND GENERAL INSURANCE", "STANDARD INSURANCE CO., INC.", "STRONGHOLD INSURANCE COMPANY, INC", "THE MERCANTILE INSURANCE CO., INC.", "UNITED COCONUT PLANTER LIFE ASSURANCE CORP.", "VALUCARE HEALTH SYSTEMS, INC."];
 
   return (
@@ -41,8 +41,8 @@ const GiaForm: FC<IGiaForm> = ({ data, setData }) => {
           <TextField fullWidth label="Line" value={data?.line} name="line" onChange={(e) => handleChange(e, data, setData)} />
         </Grid>
         <Grid item xs={6}>
-          <DatePicker label="GIA Issued Date" value={data?.giaIssuedDate ? moment(data?.giaIssuedDate) : null} onChange={(e) => handleChangeDate({ target: { name: "giaIssuedDate", value: e } }, data, setData)} slotProps={{ textField: { fullWidth: true } }} />
-          {/* <TextField fullWidth label="GIA Issued Date" value={moment(data?.giaIssuedDate)} name="giaIssuedDate" onChange={(e) =>handleChange(e, data, setData)} /> */}
+          <DatePicker label="Edia Issued Date" value={data?.ediaIssuedDate ? moment(data?.ediaIssuedDate) : null} onChange={(e) => handleChangeDate({ target: { name: "ediaIssuedDate", value: e } }, data, setData)} slotProps={{ textField: { fullWidth: true } }} />
+          {/* <TextField fullWidth label="Edia Issued Date" value={moment(data?.ediaIssuedDate)} name="ediaIssuedDate" onChange={(e) =>handleChange(e, data, setData)} /> */}
         </Grid>
         <Grid item xs={6}>
           <TextField fullWidth label="Policy No." value={data?.policyNo} name="policyNo" onChange={(e) => handleChange(e, data, setData)} />
@@ -62,18 +62,18 @@ const GiaForm: FC<IGiaForm> = ({ data, setData }) => {
           <TextField fullWidth label="Mailing Address" value={data?.mailingAddress} name="mailingAddress" onChange={(e) => handleChange(e, data, setData)} />
         </Grid>
         <Grid item xs={6}>
-          <TextField fullWidth label="GIA AR" value={data?.giaAr} name="giaAr" onChange={(e) => handleChange(e, data, setData)} />
+          <TextField fullWidth label="Edia AR" value={data?.ediaAr} name="ediaAr" onChange={(e) => handleChange(e, data, setData)} />
         </Grid>
         <Grid item xs={6}>
-          <DatePicker label="GIA AR Date" value={data?.giaArDate ? moment(data?.giaAr) : null} onChange={(e) => handleChangeDate({ target: { name: "giaDate", value: e } }, data, setData)} slotProps={{ textField: { fullWidth: true } }} />
-          {/* <TextField fullWidth label="GIA Date" value={moment(data?.giaDate)} name="giaDate" onChange={(e) =>handleChange(e, data, setData)} /> */}
+          <DatePicker label="Edia AR Date" value={data?.ediaArDate ? moment(data?.ediaAr) : null} onChange={(e) => handleChangeDate({ target: { name: "ediaDate", value: e } }, data, setData)} slotProps={{ textField: { fullWidth: true } }} />
+          {/* <TextField fullWidth label="Edia Date" value={moment(data?.ediaDate)} name="ediaDate" onChange={(e) =>handleChange(e, data, setData)} /> */}
         </Grid>
         <Grid item xs={6}>
-          <TextField fullWidth label="GIA OR" value={data?.giaOr} name="giaOr" onChange={(e) => handleChange(e, data, setData)} />
+          <TextField fullWidth label="Edia OR" value={data?.ediaOr} name="ediaOr" onChange={(e) => handleChange(e, data, setData)} />
         </Grid>
         <Grid item xs={6}>
-          <DatePicker label="GIA OR Date" value={data?.giaDate ? moment(data?.giaDate) : null} onChange={(e) => handleChangeDate({ target: { name: "giaDate", value: e } }, data, setData)} slotProps={{ textField: { fullWidth: true } }} />
-          {/* <TextField fullWidth label="GIA Date" value={moment(data?.giaDate)} name="giaDate" onChange={(e) =>handleChange(e, data, setData)} /> */}
+          <DatePicker label="Edia OR Date" value={data?.ediaDate ? moment(data?.ediaDate) : null} onChange={(e) => handleChangeDate({ target: { name: "ediaDate", value: e } }, data, setData)} slotProps={{ textField: { fullWidth: true } }} />
+          {/* <TextField fullWidth label="Edia Date" value={moment(data?.ediaDate)} name="ediaDate" onChange={(e) =>handleChange(e, data, setData)} /> */}
         </Grid>
         <Grid item xs={6}>
           <TextField fullWidth label="Insurance OR NO." value={data?.insuranceOrNo} name="insuranceOrNo" onChange={(e) => handleChange(e, data, setData)} />
@@ -87,4 +87,4 @@ const GiaForm: FC<IGiaForm> = ({ data, setData }) => {
   );
 };
 
-export default GiaForm;
+export default EdiaForm;

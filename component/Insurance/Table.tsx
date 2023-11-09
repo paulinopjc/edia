@@ -85,8 +85,8 @@ const PolicyTable: FC<IPolicyTable> = ({ data, refetch }) => {
             <TableCell>Assured</TableCell>
             <TableCell>Insurer</TableCell>
             <TableCell align="right">Policy Number</TableCell>
-            <TableCell align="right">GIA OR</TableCell>
-            <TableCell align="right">GIA Issue Date</TableCell>
+            <TableCell align="right">Edia OR</TableCell>
+            <TableCell align="right">Edia Issue Date</TableCell>
             <TableCell align="right">Expiry</TableCell>
             <TableCell align="center">View</TableCell>
             {session?.user.role == Roles.ADMIN ? <TableCell align="center">Delete</TableCell> : null}
@@ -102,8 +102,8 @@ const PolicyTable: FC<IPolicyTable> = ({ data, refetch }) => {
                 {row?.insurer ?? "Unknown"}
               </TableCell>
               <TableCell align="right">{row?.policyNo ?? "Not Included"}</TableCell>
-              <TableCell align="right">{row?.giaOr}</TableCell>
-              <TableCell align="right">{String(moment(row?.giaIssuedDate).format("MMM DD, YYYY"))}</TableCell>
+              <TableCell align="right">{row?.ediaOr}</TableCell>
+              <TableCell align="right">{String(moment(row?.ediaIssuedDate).format("MMM DD, YYYY"))}</TableCell>
               <TableCell align="right">{String(moment(row?.expiry).format("MMM DD, YYYY"))}</TableCell>
               <TableCell align="center">
                 <IconButton onClick={() => setSelectedData({ ...selectedData, selectedData: row as any, isUpdate: true })}>

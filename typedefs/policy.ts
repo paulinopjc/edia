@@ -1,10 +1,10 @@
 // export interface InsurancePolicy {
-//   giaArNo: string;
-//   giaArDate: Date;
+//   ediaArNo: string;
+//   ediaArDate: Date;
 //   insurerOrNo: string;
 //   insurerOrDate: Date;
-//   giaOrNo: string;
-//   giaOrDate: Date;
+//   ediaOrNo: string;
+//   ediaOrDate: Date;
 //   sa: string;
 //   insurer: string;
 //   assured: string;
@@ -104,9 +104,9 @@
 //   issueDate: string;
 //   inception: string;
 //   expiry: string;
-//   giaArDate: string;
+//   ediaArDate: string;
 //   insurerOrDate: string;
-//   giaOrDate: string;
+//   ediaOrDate: string;
 //   serial: string;
 //   policy: string;
 //   sa: string;
@@ -139,9 +139,9 @@
 //   updatedByAgentName?: string;
 //   updatedByAgent: string;
 //   creator?: string;
-//   giaArNo?: string;
+//   ediaArNo?: string;
 //   insurerOrNo?: string;
-//   giaOrNo?: string;
+//   ediaOrNo?: string;
 //   mailingAddress?: string;
 //   locationOfRisk?: string;
 //   particulars?: string;
@@ -183,19 +183,19 @@
 //   etc2?: string;
 // }
 
-// export interface GIAInsurancePolicy {
+// export interface EdiaInsurancePolicy {
 //   _id?: string;
 //   insurer: string;
 //   line: string;
-//   giaIssuedDate: Date;
+//   ediaIssuedDate: Date;
 //   policyNo: string;
 //   inception: Date;
 //   assured: string;
 //   expiry: Date;
 //   mailingAddress: string;
-//   giaAr: string;
-//   giaDate: Date;
-//   giaOr: string;
+//   ediaAr: string;
+//   ediaDate: Date;
+//   ediaOr: string;
 //   insuranceOrNo: string;
 //   insuranceOrNoDate: Date;
 //   type: PolicyTypes;
@@ -241,16 +241,16 @@ export interface InsurancePolicy extends DocumentResult<InsurancePolicy> {
   insurer: string;
   line: string;
   producer: string;
-  giaIssuedDate: Date;
+  ediaIssuedDate: Date;
   policyNo: string;
   inception: Date;
   assured: string;
   expiry: Date;
   mailingAddress: string;
-  giaAr: string;
-  giaArDate: string;
-  giaDate: Date;
-  giaOr: string;
+  ediaAr: string;
+  ediaArDate: string;
+  ediaDate: Date;
+  ediaOr: string;
   insuranceOrNo: string;
   insuranceOrNoDate: Date;
   remarks: Remarks[];

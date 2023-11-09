@@ -1,37 +1,37 @@
-# GIAVault Documentation
+# EdiaVault Documentation
 
-This documentation provides an overview of the GIAVault application and guides you through its features and functionalities.
+This documentation provides an overview of the EdiaVault application and guides you through its features and functionalities.
 
 ## Table of Contents
 
 1. [Overview](#overview)
 2. [Installation](#installation)
-4. [Microservices](#microservices)
-5. [Usage](#usage)
-6. [Configurations](#configurations)
-7. [API Endpoints](#api-endpoints)
-8. [Models](#models)
-9. [Helpers](#helpers)
-10. [Folder Structure](#folder-structure)
+3. [Microservices](#microservices)
+4. [Usage](#usage)
+5. [Configurations](#configurations)
+6. [API Endpoints](#api-endpoints)
+7. [Models](#models)
+8. [Helpers](#helpers)
+9. [Folder Structure](#folder-structure)
 
 ## Overview
 
-GIAVault is a web application designed to manage insurance policies and provide a centralized platform for policy management tasks. It allows users to create, update, and track insurance policies based on various types such as motor, fire, CGL, bond, marine, personal accident, and endorsement.
+EdiaVault is a web application designed to manage insurance policies and provide a centralized platform for policy management tasks. It allows users to create, update, and track insurance policies based on various types such as motor, fire, CGL, bond, marine, personal accident, and endorsement.
 
 ## Installation
 
-To install and run GIAVault locally, follow these steps:
+To install and run EdiaVault locally, follow these steps:
 
 1. Clone the repository:
 
    ```
-   git clone https://github.com/your-username/giavault.git
+   git clone https://github.com/your-username/ediavault.git
    ```
 
 2. Install the dependencies:
 
    ```
-   cd giavault
+   cd ediavault
    npm install
    ```
 
@@ -43,7 +43,7 @@ To install and run GIAVault locally, follow these steps:
    npm run dev
    ```
 
-5. Open your browser and visit `http://localhost:3000` to access the GIAVault application.
+5. Open your browser and visit `http://localhost:3000` to access the EdiaVault application.
 
 ## Microservices
 
@@ -51,9 +51,9 @@ To install and run GIAVault locally, follow these steps:
 
 ## Usage
 
-The GIAVault application provides a user-friendly interface for managing insurance policies. Here are some of the key features:
+The EdiaVault application provides a user-friendly interface for managing insurance policies. Here are some of the key features:
 
-- **Policy Creation**: Create new insurance policies by filling in the necessary details such as insurer, line, GIA issued date, policy number, inception date, assured, expiry date, mailing address, and more.
+- **Policy Creation**: Create new insurance policies by filling in the necessary details such as insurer, line, Edia issued date, policy number, inception date, assured, expiry date, mailing address, and more.
 
 - **Policy Management**: View, update, and delete existing insurance policies. Modify policy details, add remarks, and track important information related to each policy.
 
@@ -65,7 +65,7 @@ The GIAVault application provides a user-friendly interface for managing insuran
 
 ## Configurations
 
-The GIAVault application requires certain configurations to run correctly. These configurations can be set using environment variables defined in the `.env` file. Below are the important variables to configure:
+The EdiaVault application requires certain configurations to run correctly. These configurations can be set using environment variables defined in the `.env` file. Below are the important variables to configure:
 
 - `NEXT_PRIVATE_MONGODB_URL`: The URL of the MongoDB database.
 - `NEXT_API_URL`: The URL of the API (yourIp:appPort)
@@ -75,7 +75,7 @@ Ensure that you set the appropriate values for these variables before running th
 
 ## API Endpoints
 
-GIAVault exposes several API endpoints for managing insurance policies and related operations. Here are some of the main endpoints:
+EdiaVault exposes several API endpoints for managing insurance policies and related operations. Here are some of the main endpoints:
 
 - `/api/auth/[...nextauth]`: Authentication-related endpoints for user authentication.
 - `/api/login`: Endpoint for user login.
@@ -90,7 +90,7 @@ For detailed documentation on each API endpoint, refer to the API documentation.
 
 ## Pages
 
-The GIAVault application includes the following pages:
+The EdiaVault application includes the following pages:
 
 - `/dashboard`: Dashboard page displaying an overview of insurance policies and notifications.
 - `/insurance/form`: Form page for creating or editing insurance policies.
@@ -106,7 +106,7 @@ For more details on each page's functionalities and usage, refer to the correspo
 
 ## Models
 
-The GIAVault application uses Mongoose models to define the structure and behavior of the data stored in the MongoDB database. The models are located in the `models/` directory and include schemas for insurance policies, notifications, users, and more.
+The EdiaVault application uses Mongoose models to define the structure and behavior of the data stored in the MongoDB database. The models are located in the `models/` directory and include schemas for insurance policies, notifications, users, and more.
 
 ## Helpers
 
@@ -114,16 +114,16 @@ The `helpers/` directory contains utility functions and helper modules used thro
 
 ## Folder Structure
 
-The folder structure of the GIAVault application is organized as follows:
+The folder structure of the EdiaVault application is organized as follows:
 
 ```
-giavault
+ediavault
     ├── README.md
     ├── component
     │   ├── Agent
     │   │   ├── DynamicForm.tsx
     │   │   ├── FormRenderer.tsx
-    │   │   ├── GiaForm.tsx
+    │   │   ├── EdiaForm.tsx
     │   │   ├── InsuranceForm.tsx
     │   │   └── MotorForm.tsx
     │   ├── Copyright.tsx
@@ -239,7 +239,7 @@ giavault
     │   │           └── default.jpg
     │   ├── thirteen.svg
     │   ├── uploads
-    │   │   └── new-test-gia.xlsx
+    │   │   └── new-test-edia.xlsx
     │   └── vercel.svg
     ├── server.js
     ├── services

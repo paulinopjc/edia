@@ -6,7 +6,7 @@ import { InsurancePolicy, PolicyTypes } from "@typedefs/policy";
 import { AddPolicy, UpdatePolicy } from "@helper/client/policy";
 import { useSession } from "next-auth/react";
 import SnackBarComponent from "@components/Snackbar";
-import GiaForm from "./GiaForm";
+import EdiaForm from "./EdiaForm";
 import FormRenderer from "./FormRenderer";
 import Remarks from "./Remarks";
 import { useRouter } from "next/router";
@@ -118,11 +118,11 @@ const InsuranceForm: FC<IInsuranceForm> = ({ open, data, onClose }) => {
               </Grid>
               <Grid item xs={12}>
                 <Typography id="premium" key={`prem`} component="h3" variant="h6" sx={{ fontStyle: "bold" }}>
-                  GIA Details *
+                  Edia Details *
                 </Typography>
               </Grid>
               <Grid item xs={12}>
-                <GiaForm data={entries} setData={setEntries} />
+                <EdiaForm data={entries} setData={setEntries} />
               </Grid>
               <Grid item xs={12}>
                 <Divider />
