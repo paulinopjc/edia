@@ -3,9 +3,6 @@ branch-defaults:
     environment: null
   master:
     environment: null
-commands:
-  01_custom_npm_install:
-    command: "npm i --legacy--peer--deps"
 global:
   application_name: Edia-env
   branch: null
