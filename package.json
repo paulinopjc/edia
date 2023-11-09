@@ -6,7 +6,7 @@
     "server": "node server.js",
     "dev": "next dev",
     "build": "next build",
-    "start": "next start -p $PORT",
+    "start": "npm install --legacy-peer-deps && node server.js",
     "lint": "next lint",
     "test:api": "jest",
     "test:watch": "jest --watch",
