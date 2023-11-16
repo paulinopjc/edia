@@ -3,11 +3,12 @@ branch-defaults:
     environment: null
   master:
     environment: null
+    group_suffix: null
 global:
-  application_name: Edia-env
+  application_name: edia-master-V2
   branch: null
   default_ec2_keyname: aws-eb
-  default_platform: Node.js 18 running on 64bit Amazon Linux 2023
+  default_platform: Node.js 18
   default_region: ap-southeast-2
   include_git_submodules: true
   instance_profile: null
