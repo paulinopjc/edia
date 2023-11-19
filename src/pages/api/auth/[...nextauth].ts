@@ -28,19 +28,22 @@ const options = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        const res = await fetch(`${process.env.NEXT_API_URL}/api/login?username=${credentials?.username}&password=${credentials?.password}`, {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-        });
-        let user = await res.json();
-        // If no error and we have user data, return it
-        if (res.ok && user.token) {
-          const newUser = JWTParse(user.token);
-          user = { ...newUser, accessToken: user.token };
-          return user;
+        try {
+          const res = await fetch(`${process.env.NEXT_API_URL}/api/login?username=${credentials?.username}&password=${credentials?.password}`, {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+          });
+          let user = await res.json();
+          // If no error and we have user data, return it
+          if (res.ok && user.token) {
+            const newUser = JWTParse(user.token);
+            user = { ...newUser, accessToken: user.token };
+            return user;
+          }
+        } catch (e: any) {
+          throw new Error(e);
         }
         // Return null if user data could not be retrieved
-        throw new Error("Unauthorized");
         // return null;
       },
     }),
