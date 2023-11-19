@@ -38,6 +38,6 @@ app.prepare().then(() => {
         createNotifs();
       })
       .catch((err) => console.log(err));
-    console.log(`> Ready on ${NEXT_API_URL}:${port}`);
+    console.log(`> Ready on ${process.env.NEXT_API_URL}:${port}`);
   });
 });

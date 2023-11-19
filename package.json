@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "server": "node server.js",
-    "dev": "next dev",
+    "dev": "next dev -p 3001",
     "build": "next build",
-    "start": "next start -p $PORT",
+    "start": "NODE_ENV=production node server.js",
     "eb": "eb deploy Edia-env-env",
     "lint": "next lint",
     "test:api": "jest",
