@@ -62,7 +62,11 @@ const ChatModule: React.FC = () => {
     //   sender: "user",
     // };
     // setMessages((prevMessages) => [...prevMessages, newMessage]);
-    // // Automatically scroll to the bottom of the chat box when new messages are added
+    const newMessage: Message = {
+      text: disclaimer,
+      sender: "user",
+    };
+    //setMessages((prevMessages) => [...prevMessages, newMessage]);
     if (chatBoxRef.current) {
       chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
     }
