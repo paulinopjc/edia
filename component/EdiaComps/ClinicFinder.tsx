@@ -1,126 +1,119 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { GoogleMap, InfoWindow, Marker, MarkerF, useLoadScript } from "@react-google-maps/api";
-import axios from "axios";
-import { API } from "@libs/api";
-interface Clinic {
-  name: string;
-  address: string;
-  lat: number;
-  lng: number;
-}
-const mapContainerStyle = {
-  width: "100%",
-  height: "400px",
-};
+import Map, { Marker, Popup, NavigationControl, FullscreenControl, ScaleControl, GeolocateControl, ViewState } from "react-map-gl";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import "mapbox-gl/dist/mapbox-gl.css"; // Example import for a specific component
 
-type Coordinates = {
-  lat: number;
-  lng: number;
-};
-
-type MapProps = {
-  googleMapsApiKey: string;
-};
-
+const MAPBOX_TOKEN = "pk.eyJ1IjoiYXJiYXRhbSIsImEiOiJjbHBiZWdra24wZnZuMmpxbzQzNXBwajF2In0.ebOoMEM2aeEP7k0acFbXNA";
 const center = {
   lat: 0, // Placeholder value, it will be updated with the user's current location
   lng: 0, // Placeholder value, it will be updated with the user's current location
 };
-const apiKey = "AIzaSyAaF8jZ3QgSvdItou0dLzVq3pof_L_oYvs";
-const GoogleMapComponent: React.FC = () => {
-  // infers type from default value
-  const [selectedMarker, setSelectedMarker] = useState<Coordinates | null>(center);
-  const libraries = ["places"];
-  const [clinics, setClinics] = useState<any>([]);
-  const [loading, setLoading] = useState(true);
-  const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: apiKey,
-  });
-  useEffect(() => {
-    // Fetch clinics based on user's location
-    console.log("getting nearby clinics");
-
-    try {
-      console.log("getting current position");
+const MapComponent: React.FC = () => {
+  const [latitude, setLatitude] = useState<number | null>(null);
+  const [longitude, setLongitude] = useState<number | null>(null);
+  const [places, setPlaces] = useState([]);
+  const [selectedPlace, setSelectedPlace] = useState<any>(null);
+  const [response, setResponse] = useState("");
+  const handleGetClinics = async () => {
+    console.error("Getting Clinics...");
+    if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        async (position) => {
-          const { latitude, longitude } = position.coords;
-
-          // Update map center
-          center.lat = latitude;
-          center.lng = longitude;
-          try {
-            // Make API request to fetch nearest clinics
-            // .get(`https://edia-be.azurewebsites.net/api/api/gmaps`, {
-            const response = API.post(`/api/api/gmaps`, {
-              location: `${latitude},${longitude}`,
-              radius: 1000,
-              input: "psychotherapist",
-              type: "doctor",
-              key: apiKey,
-            })
-              .then((response) => {
-                console.log("CLINICS: ", response.data.results);
-                setClinics(response.data.results);
-              })
-              .catch((error) => {
-                console.error("Error:", error);
-              });
-          } catch (error) {
-            console.error("Error fetching clinics:", error);
-          } finally {
-            setLoading(false);
-          }
+        (position) => {
+          setLatitude(position.coords.latitude);
+          setLongitude(position.coords.longitude);
         },
         (error) => {
-          console.error("Error getting current location:", error);
-          setLoading(false);
-        },
-        { timeout: 5000, maximumAge: 60000, enableHighAccuracy: true }
+          console.error("Error getting geolocation:", error);
+        }
       );
-    } catch (error) {
-      console.log("Error fetching", error);
+      try {
+        const res = await fetch("/api/clinicMapBox");
+        if (res.ok) {
+          const { data } = await res.json();
+          setPlaces(data?.features);
+          console.log("Message Recieved parced, ", data?.features);
+        } else {
+          console.log("Reply Error:", res.statusText);
+          // Handle errors here
+        }
+        // const res = await fetch("/api/clinicMapBox", {
+        //   method: "GET",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        // });
+        // console.log("Message Recieved, ", res);
+
+        // if (res.ok) {
+        //   const data = await res.json();
+        //   console.log("Message Recieved parced, ", data);
+        //   setResponse(data.data); // Set the response data in state or handle it accordingly
+
+        //   console.log("Reply Parced:", data.data);
+        // } else {
+        //   console.log("Error Recieved parced, ", res);
+        //   // Handle errors here
+        // }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    } else {
+      console.error("Geolocation is not supported");
     }
+  };
+  useEffect(() => {
+    handleGetClinics();
   }, []);
-
-  if (loadError) {
-    return <div>Error loading Map</div>;
-  }
-
-  if (!isLoaded) {
-    return <div>Loading Map...</div>;
-  }
-
   return (
     <div style={{ height: "1200px", width: "100%" }}>
-      {
-        <GoogleMap mapContainerStyle={{ height: "100%", width: "100%" }} zoom={15} center={center}>
-          {clinics.map((clinic: any) => (
-            <MarkerF
-              position={clinic.geometry.location}
-              onClick={() => {
-                setSelectedMarker(clinic.geometry.location);
+      <Map
+        initialViewState={{
+          latitude: 14.589834045544592,
+          longitude: 120.98099329101666,
+          zoom: 12,
+          bearing: 0,
+          pitch: 0,
+        }}
+        mapStyle="mapbox://styles/mapbox/streets-v12"
+        mapboxAccessToken={MAPBOX_TOKEN}
+      >
+        <GeolocateControl position="top-left" />
+        <FullscreenControl position="top-left" />
+        <div style={{ position: "absolute", right: 10, top: 10 }}>
+          <NavigationControl />
+        </div>
+        <ScaleControl />
+        {places.map((place: any) => (
+          <Marker key={place.id} latitude={place.center[1]} longitude={place.center[0]}>
+            <button
+              className="marker-btn"
+              onClick={(e) => {
+                e.preventDefault();
+                console.log("Selected a place", place);
+                setSelectedPlace(place);
               }}
-              key={clinic.place_id}
             >
-              {selectedMarker && (
-                <InfoWindow
-                  onCloseClick={() => {
-                    setSelectedMarker(null);
-                  }}
-                  key={clinic.place_id}
-                  position={clinic.geometry.location}
-                >
-                  <a aria-label="open link to directions" key={clinic.place_id} className="underline hover:text-blue-750">
-                    {clinic.name}
-                  </a>
-                </InfoWindow>
-              )}
-            </MarkerF>
-          ))}
-        </GoogleMap>
-      }
+              <div>
+                {/* Use the default Mapbox marker icon */}
+                <img src="https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png" alt="Marker" style={{ width: "24px", height: "24px" }} />
+              </div>
+              {/* Add your marker icon/image here */}
+              {/* Example: <img src="marker.png" alt="Restaurant Marker" /> */}
+            </button>
+          </Marker>
+        ))}
+
+        {selectedPlace && (
+          <Popup latitude={selectedPlace.center[1]} longitude={selectedPlace.center[0]} onClose={() => setSelectedPlace(null)}>
+            <div>
+              <h3>{selectedPlace.text}</h3>
+              <p>Address: {selectedPlace.place_name}</p>
+              {/* Add other restaurant information here */}
+            </div>
+          </Popup>
+        )}
+      </Map>
     </div>
   );
 };
-export default GoogleMapComponent;
+export default MapComponent;

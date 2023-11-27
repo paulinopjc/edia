@@ -2,10 +2,9 @@ import Container from "@mui/material/Container";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { getNotificationsClient } from "@helper/client/notification";
-import ChatModule from "@components/ChatbotModule";
-import GoogleMapComponent from "@components/EdiaComps/ClinicFinder";
+import MapComponent from "@components/EdiaComps/ClinicFinder";
 
-const GoogleMapContainer = () => {
+const MapContainer = () => {
   const { data: session, status } = useSession({ required: true });
   const [policies, setPolicies] = useState([]);
 
@@ -17,9 +16,9 @@ const GoogleMapContainer = () => {
 
   return (
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-      <GoogleMapComponent />
+      <MapComponent />
     </Container>
   );
 };
 
-export default GoogleMapContainer;
+export default MapContainer;

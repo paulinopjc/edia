@@ -1,8 +1,7 @@
 import Head from "next/head";
 import Loader from "@components/Loader";
-import ChatbotContainer from "@containers/Chatbot";
 import { Roles } from "@typedefs/roles";
-import { GoogleMap } from "@react-google-maps/api";
+import MapContainer from "@containers/MapContainer";
 
 export default function Clinic() {
   return (
@@ -10,7 +9,7 @@ export default function Clinic() {
       <Head>
         <title>Clinic Finder</title>
       </Head>
-      <GoogleMap />
+      <MapContainer />
     </>
   );
 }
