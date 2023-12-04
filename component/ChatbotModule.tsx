@@ -57,20 +57,18 @@ const ChatModule: React.FC = () => {
   const chatBoxRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // const newMessage: Message = {
-    //   text: disclaimer,
-    //   sender: "user",
-    // };
-    // setMessages((prevMessages) => [...prevMessages, newMessage]);
-    const newMessage: Message = {
-      text: disclaimer,
-      sender: "user",
-    };
-    //setMessages((prevMessages) => [...prevMessages, newMessage]);
     if (chatBoxRef.current) {
       chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
     }
   }, [messages]);
+
+  useEffect(() => {
+    const newMessage: Message = {
+      text: disclaimer,
+      sender: "bot",
+    };
+    setMessages(() => [newMessage]);
+  }, [0]);
 
   const handleSendMessage = async () => {
     if (newMessage.trim() === "") return;
