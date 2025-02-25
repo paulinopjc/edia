@@ -22,7 +22,7 @@ export const RegisterApi = async (data: IUser) => {
       password: hashed,
       securityQuestions: secQuestions.length > 1 ? secQuestions : null,
     };
-    console.log("updated", updated);
+   
     await User.create(updated);
     return { status: true, code: null };
   } catch (e: any) {
@@ -36,6 +36,7 @@ export const LoginApi = async (data: Partial<IUser>) => {
     const { username, password } = data;
     const { password: docPass, role, _id } = await User.findOne({ username });
     if (!docPass) return false;
+    console.error(await bcrypt.hash(password as string,10),docPass)
     const isMatch = await bcrypt.compare(password as string, docPass);
     if (!isMatch) return false;
     const jwtToken = JWTSign({ username, role, _id });

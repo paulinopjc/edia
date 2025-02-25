@@ -29,7 +29,10 @@ const Login = () => {
     message: null,
   });
 
-  const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
+  const handleClose = (
+    event: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
     if (reason === "clickaway") {
       return;
     }
@@ -38,7 +41,12 @@ const Login = () => {
 
   const action = (
     <React.Fragment>
-      <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleClose}
+      >
         <CloseIcon fontSize="small" />
       </IconButton>
     </React.Fragment>
@@ -47,12 +55,32 @@ const Login = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     let object: any = {};
-    new FormData(event.currentTarget).forEach((value: any, key: any) => (object[key] = value));
-    if (isEmptyNoSec(object)) return setSnackbar({ isOpen: true, isError: true, message: "Check your fields" });
-    signIn("credentials", { username: object?.username!, password: object?.password!, redirect: false }).then((e) => {
-      if (e?.error) setSnackbar({ isOpen: true, isError: true, message: "Your credentials is invalid, please try again" });
-      else if (e?.ok) Router.push("/dashboard");
+    new FormData(event.currentTarget).forEach(
+      (value: any, key: any) => (object[key] = value)
+    );
+    if (isEmptyNoSec(object))
+      return setSnackbar({
+        isOpen: true,
+        isError: true,
+        message: "Check your fields",
+      });
+    signIn("credentials", {
+      username: object.username!,
+      password: object.password!,
+      redirect: false,
+    }).then((e) => {
+      console.log("SignIn Response:", e);
+      if (e?.error) {
+        setSnackbar({
+          isOpen: true,
+          isError: true,
+          message: "Your credentials are invalid, please try again",
+        });
+      } else if (e?.ok) {
+        Router.push(e.url || "/dashboard");
+      }
     });
+
     // const res = await LoginClient(object);
     // if (!res.isOpen && !res.isError && res.message.length > 1) {
     //   setCookie("auth", res.message);
@@ -78,7 +106,16 @@ const Login = () => {
           Sign in
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-          <TextField margin="normal" required fullWidth name="username" label="Username" type="text" id="username" autoComplete="current-username" />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="username"
+            label="Username"
+            type="text"
+            id="username"
+            autoComplete="current-username"
+          />
           <TextField
             margin="normal"
             required
@@ -96,25 +133,45 @@ const Login = () => {
                       setIsPasswordVisible(!isPasswordVisible);
                     }}
                   >
-                    {isPasswordVisible ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                    {isPasswordVisible ? (
+                      <VisibilityOffIcon />
+                    ) : (
+                      <VisibilityIcon />
+                    )}
                   </IconButton>
                 </InputAdornment>
               ),
             }}
           />
 
-          <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
-          <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+          <FormControlLabel
+            control={<Checkbox value="remember" color="primary" />}
+            label="Remember me"
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
             Sign In
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2" onClick={() => Router.push("/reset")}>
+              <Link
+                href="#"
+                variant="body2"
+                onClick={() => Router.push("/reset")}
+              >
                 Forgot password?
               </Link>
             </Grid>
             <Grid item alignItems="center" justifyContent="center">
-              <Link href="#" variant="body2" onClick={() => Router.push("/register")}>
+              <Link
+                href="#"
+                variant="body2"
+                onClick={() => Router.push("/register")}
+              >
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>

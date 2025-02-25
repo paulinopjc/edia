@@ -1,7 +1,7 @@
 //@ts-nocheck
 // import "@/styles/globals.css";
-import { createTheme } from "@mui/material";
-import { ThemeProvider } from "@mui/styles";
+
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 import type { AppProps } from "next/app";
 import { SessionProvider, useSession } from "next-auth/react";
 import Loader from "@components/Loader";
@@ -13,19 +13,22 @@ const theme = createTheme({
       main: "#f9b17a",
     },
     background: {
-      default: "#2d3250",
+      default: "#ffffff",
     },
     secondary: {
       main: "#ffffff",
     },
     text: {
-      primary: "#ffffff",
+      primary: "#000000",
       secondary: "#2d3250",
     },
   },
 });
 
-export default function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps) {
   return (
     <SessionProvider session={session}>
       <ThemeProvider theme={theme}>

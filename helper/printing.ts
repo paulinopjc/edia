@@ -228,7 +228,8 @@ export const getPolicy = async (policyId: string) => {
       premiumY -= 20;
     }
     const buffAsync = await jimpImage.getBufferAsync(Jimp.MIME_PNG);
-    await fs.writeFile(imagePathResult, buffAsync);
+    const bufferAsUint8Array = new Uint8Array(buffAsync);
+    await fs.writeFile(imagePathResult, bufferAsUint8Array); 
     return filename;
   } catch (e) {
     console.log("error in printing", e);
