@@ -8,6 +8,10 @@ import { toInteger } from "lodash";
 
 export const RegisterApi = async (data: IUser) => {
   try {
+    if(  !data?.password) {
+      return { status: false, code: "MISSING_PASSWORD" };
+    }
+
     const hashed = await bcrypt.hash(data.password, 10);
     const secQuestions = [];
     console.log("data.securityQuestions", data.securityQuestions);

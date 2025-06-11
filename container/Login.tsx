@@ -55,9 +55,11 @@ const Login = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     let object: any = {};
+    console.log("FormData:", new FormData(event.currentTarget));
     new FormData(event.currentTarget).forEach(
       (value: any, key: any) => (object[key] = value)
     );
+    console.log("object:", object);
     if (isEmptyNoSec(object))
       return setSnackbar({
         isOpen: true,

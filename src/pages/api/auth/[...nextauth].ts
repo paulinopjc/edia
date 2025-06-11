@@ -33,18 +33,32 @@ const options = {
         }
         try {
           const res = await fetch(`${process.env.NEXT_API_URL}/api/login?username=${credentials?.username}&password=${credentials?.password}`, {
-            method: "POST",
+            method: "GET",
             headers: { "Content-Type": "application/json" },
           });
+
+          if (!res.ok) {
+            console.error("Login API failed:", await res.text());
+            return null;
+          }
+
           let user = await res.json();
+
+          if( !user.token ) return null;
+
           // If no error and we have user data, return it
           if (res.ok && user.token) {
+            if (!user || !user.token) {
+              throw new Error("Token is missing");
+            }
             const newUser = JWTParse(user.token);
             user = { ...newUser, accessToken: user.token };
             return user;
           }
         } catch (e: any) {
-          throw new Error(e);
+          // throw new Error(e);
+          console.error("Authorize error:", e);
+          return null;
         }
         // Return null if user data could not be retrieved
         // return null;

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import NextLink from "next/link";
-import { Avatar, Box, Button, Divider, Hidden, lighten, List, ListItem, ListItemText, Popover, Typography } from "@mui/material";
+import { Avatar, Box, Button, Divider, Hidden, lighten, List, ListItem, ListItemText, Popover, Typography, ListItemButton } from "@mui/material";
 import AccountBoxTwoToneIcon from "@mui/icons-material/AccountBoxTwoTone";
 import { styled } from "@mui/material/styles";
 import ExpandMoreTwoToneIcon from "@mui/icons-material/ExpandMoreTwoTone";
@@ -8,10 +8,11 @@ import LockOpenTwoToneIcon from "@mui/icons-material/LockOpenTwoTone";
 import { signOut, useSession } from "next-auth/react";
 import { Roles } from "@typedefs/roles";
 
-const UserBoxButton = styled(Button)(
+const UserBoxButton = styled(Box)(
   ({ theme }) => `
         padding-left: ${theme.spacing(1)};
         padding-right: ${theme.spacing(1)};
+        cursor: pointer;
 `
 );
 
@@ -80,7 +81,7 @@ function UserDropdown() {
 
   return (
     <>
-      <UserBoxButton color="primary" ref={ref} onClick={handleOpen}>
+      <UserBoxButton ref={ref} onClick={handleOpen} sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }} role="button" tabIndex={0}>
         <Avatar variant="rounded" alt={user.name} src={user.avatar} />
         <Hidden mdDown>
           <UserBoxText>
@@ -114,12 +115,12 @@ function UserDropdown() {
         </MenuUserBox>
         <Divider sx={{ mb: 0 }} />
         <List sx={{ p: 1 }} component="nav">
-          <NextLink href="/user/edit" passHref>
-            <ListItem button>
+          <ListItem disableGutters>
+            <ListItemButton component={NextLink} href="/user/edit">
               <AccountBoxTwoToneIcon fontSize="small" />
               <ListItemText primary="My Profile" />
-            </ListItem>
-          </NextLink>
+            </ListItemButton>
+          </ListItem>
         </List>
         <Divider />
         <Box sx={{ m: 1 }}>

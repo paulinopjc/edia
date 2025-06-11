@@ -1,28 +1,37 @@
 // pages/api/rasaEndpoint.ts
 
 import { NextApiRequest, NextApiResponse } from "next";
-import axios from "axios"; // Ensure you've installed axios as a dependency
+import axios from "axios";
+
 const rasaApiUrl: string | undefined = process.env.RASA_NLU_SERVER;
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method === "POST") {
-    const { userInput } = req.body; // Assuming userInput is sent in the request body
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method Not Allowed" });
+  }
 
-    // Configure your Rasa NLU server URL
-    // const rasaNLUUrl = "http://localhost:5005/webhooks/rest/webhook"; // Replace with your Rasa NLU server's URL
-    const rasaNLUUrl = rasaApiUrl; // Replace with your Rasa NLU server's URL/
+  const { userInput } = req.body;
 
-    try {
-      // Make a POST request to your Rasa NLU server
-      const response = await axios.post(rasaNLUUrl ?? "", { message: userInput });
+  if (!userInput) {
+    return res.status(400).json({ error: "userInput is required in the request body." });
+  }
 
-      // Assuming Rasa NLU server responds with the parsed data
-      const responseData = response.data;
+  if (!rasaApiUrl) {
+    return res.status(500).json({ error: "RASA_NLU_SERVER is not configured." });
+  }
 
-      res.status(200).json({ data: responseData });
-    } catch (error) {
-      res.status(500).json({ error: "Error fetching data from Rasa NLU server" });
-    }
-  } else {
-    res.status(405).json({ error: "Method Not Allowed" });
+  try {
+    const response = await axios.post(rasaApiUrl, {
+      sender: "user", // required by Rasa
+      message: userInput,
+    });
+
+    res.status(200).json({ data: response.data });
+  } catch (error: any) {
+    console.error("Rasa API error:", error?.response?.data || error.message);
+    res.status(500).json({
+      error: "Error fetching data from Rasa NLU server",
+      details: error?.response?.data || error.message,
+    });
   }
 }

@@ -1,12 +1,12 @@
-import { Schema, model, models, Document, Model } from "mongoose";
-import { Roles } from "@typedefs/roles";
+const { Schema, model, models, Model } = require("mongoose");
+const { Roles } = require("@typedefs/roles");
 
 const SecurityQuestionsSchema = new Schema({
   question: { type: String, required: true },
   answer: { type: String, required: true },
 });
 
-export const UserSchema = new Schema(
+const UserSchema = new Schema(
   {
     username: {
       type: String,
